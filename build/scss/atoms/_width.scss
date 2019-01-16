@@ -1,0 +1,26 @@
+.width-full-width{
+   max-width:100%;
+   padding-right:1em;
+   padding-left:1em;
+ }
+
+.width-block{
+   margin-right:auto;
+   margin-left:auto;
+   max-width:$width;
+   padding-right:1em;
+   padding-left:1em;
+}
+
+div.copy-width{
+   max-width:600px;
+   margin:0 auto;
+}
+
+@media all and (min-width:$width) {
+   .width-full-width,
+   .width-block{
+      padding-left:0px;
+      padding-right:0px;
+   }
+}

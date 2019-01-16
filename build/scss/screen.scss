@@ -1,0 +1,12 @@
+@import "partials/**/*.scss";
+
+@import "atoms/**/*.scss";
+@import "molecules/**/*.scss";
+@import "organisms/**/*.scss";
+@import "pages/**/*.scss";
+
+div.placeholder{
+    height:400px;
+    width:100%;
+    background-color:pink;
+}

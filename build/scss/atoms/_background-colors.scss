@@ -1,0 +1,41 @@
+// modifier: colors
+.background-color-white{
+    background-color:palette(light);
+    position: relative;
+    z-index: 1;
+ }
+
+ .background-color-primary{
+    background-color:palette(primary);
+    position: relative;
+    z-index: 1;
+ }
+ .background-color-light-primary{
+    background-color:palette(primary,light);
+    position: relative;
+    z-index: 1;
+ }
+
+ .background-color-grey{
+    background-color:palette(grey);
+    position: relative;
+    z-index: 1;
+ }
+
+ .background-color-light-grey{
+    background-color:palette(grey, light);
+    position: relative;
+    z-index: 1;
+ }
+
+ .background-color-dark{
+    background-color:palette(dark);
+    position: relative;
+    z-index: 1;
+ }
+
+ .background-color-dark-blue{
+   background-color:palette(dark);
+   position: relative;
+   z-index: 1;
+}

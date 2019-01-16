@@ -1,0 +1,85 @@
+.a_button {
+    font-size: 14px;
+    padding: 0.75em 1.5em 0.8em;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 700;
+    display: inline-block;
+    border: 2px solid inherit;
+    @extend %default-transition;
+    font-family: type(sans);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  
+    &.primary {
+      background-color: palette(primary);
+      color: palette(light);
+      border: 2px solid palette(primary);
+      position: relative;
+      @extend %default-transition;
+      transition-duration:0.2s;
+  
+      &:before {
+        @extend %default-transition;
+        content: "";
+        background-color: darken(palette(grey),10%);
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: -2px;
+        left: -2px;
+        position: absolute;
+        z-index: -1;
+      }
+  
+      &:hover:before {
+        top: 6px;
+        left: 6px;
+      }
+
+      &:disabled{
+        background-color:palette(grey);
+        border-color:palette(grey);
+        cursor:not-allowed;
+        &:before{
+          content:none;
+        }
+      }
+    }
+  
+    &.secondary {
+      background-color: palette(light);
+      color: palette(primary);
+      border: 2px solid palette(primary);
+    }
+  
+    &.tertiary {
+      background-color: palette(light);
+      color: palette(primary);
+      position: relative;
+      @extend %default-transition;
+  
+      &:before {
+        @extend %default-transition;
+      }
+  
+      &:hover {
+        top: -2px;
+        left: -2px;
+        @extend %default-transition; //@ema I did this to .primary already, but I think we want to put content and all that original styling in the :before _before_ hover. Doing it on :hover gives us no transition at all since the psuedo content is being added to the dom on hover instead of already being in the dom to be transitioned
+  
+        &:before {
+          content: "";
+          background-color: #697282;
+          display: block;
+          width: 100%;
+          height: 100%;
+          top: 6px; // @ema can you try and create a @size function that accepts a parameter that will automatically add these two values? I think it could help clean this up a bit and a fun exercise in scss to know 
+          left: 6px;
+          position: absolute;
+          z-index: -1;
+        }
+      }
+    }
+  }
+  

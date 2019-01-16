@@ -1,0 +1,162 @@
+/*
+Feature Tiles
+Hero Block
+Icon Block
+Rich Text
+*/
+
+/*//////////////////////////////////////
+// Imports
+//////////////////////////////////////*/
+@import "bourbon/bourbon";
+@import "neat/neat";
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900');
+
+/*//////////////////////////////////////
+//  Colors
+//////////////////////////////////////*/
+$palettes: (
+   light: (
+      base: #ffffff
+   ),
+   dark: (
+      base: #070707,
+      blue: #0d1018
+   ),
+   grey: (
+      base: #86888c,
+      light: #eef1f5,
+      dark: #1b2029
+   ),
+   primary: (
+      base: #dc1f26
+   ),
+);
+
+
+/*//////////////////////////////////////
+//  Fonts
+//////////////////////////////////////*/
+$fontStack: (
+    sans: (
+        regular: #{'Source Sans Pro', 'helvetica', Arial}
+    ),
+    serif: (
+        regular: Georgia
+    )
+);
+
+/*//////////////////////////////////////
+//  Functions
+//////////////////////////////////////*/
+@function type($font, $weight: 'regular') {
+  @return map-get(map-get($fontStack, $font), $weight);
+}
+
+@function palette($palette, $tone: 'base') {
+  @return map-get(map-get($palettes, $palette), $tone);
+}
+
+/*//////////////////////////////////////
+//  Vars
+//////////////////////////////////////*/
+$width: 1165px;
+
+/*//////////////////////////////////////
+//  Silent classes
+//////////////////////////////////////*/
+%block {
+  max-width: $max-width;
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
+%marpad {
+  padding: 0;
+  margin: 0;
+}
+
+%default-transition {
+  @include transition(all 0.2s ease-in-out);
+}
+
+%middle {
+  @include position(relative, 50% auto auto auto);
+  @include transform(translateY(-50%));
+}
+
+%center {
+  @include position(relative, auto auto auto 50%);
+  @include transform(translateX(-50%));
+}
+
+%absolute-middle {
+  @include position(absolute, 50% auto auto 50%);
+  @include transform(translateY(-50%) translateX(-50%));
+}
+
+%clear-position {
+  @include position(relative, auto auto auto auto);
+  @include transform(translateX(-50%) translateY(-50%));
+}
+
+%hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+%psuedo-content {
+  content: " ";
+  display: block;
+}
+
+.clear {
+  &:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+body{
+   font-family: type(sans);
+   margin:0px;
+   padding:0px;
+}
+
+.image{
+   transition:all 0.3s ease-in-out;
+}
+
+div.modifiers{
+  width:700px;
+  margin:0 auto;
+  input[type="select"],h4{
+    display:inline-block;
+    margin-bottom:7px;
+  }
+  h3{
+      margin-bottom:5px;
+      font-weight:700;
+      border-bottom:2px solid;
+   }
+   & > div{
+      display:inline-block;
+      padding-right:40px;
+   }
+}
+
+@mixin color($color){
+  a{
+      h1,h2,h3,h4,h5,h6,p,li{
+          color:$color;
+      }
+  }
+  color:$color;
+  svg use,
+  svg path{
+      fill:$color;
+  }
+}
