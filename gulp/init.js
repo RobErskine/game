@@ -1,7 +1,8 @@
 'use strict';
 
 const gulp        = require('gulp'),
-      browserSync = require('browser-sync').create();
+      browserSync = require('browser-sync').create(),
+      config      = require('dotenv').config();
 
 // // // // // // //
 //
@@ -10,7 +11,7 @@ const gulp        = require('gulp'),
 // // // // // // //
 function browser_sync() {
     browserSync.init(null, {
-        proxy: "game.personal.test",
+        proxy: process.env.SITE_URL,
         port: 7102,
         notify: {
             styles: ['opacity: 0', 'position: absolute']

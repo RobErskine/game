@@ -1,23 +1,42 @@
 'use strict';
 
-function isElementInViewport (el) {
-    //special bonus for those using jQuery
-    if (typeof jQuery === "function" && el instanceof jQuery) {
-        el = el[0];
-    }
+function isElementInContainer (el, container, threshold, direction) {
+  //special bonus for those using jQuery
+  if (typeof jQuery === "function" && el instanceof jQuery) {
+      el = el[0];
+      container = container[0];
+  }
 
-    var rect = el.getBoundingClientRect();
+  var rect = el.getBoundingClientRect();
+  var cont = container.getBoundingClientRect();
 
-    var top = rect.top;
-    var bottom = rect.bottom;
-    var browserHeight = $(window).height();
-
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= ($(window).height()) &&
-        rect.right <= ($(window).width())
-    );
+  switch(direction){
+    case("top"):
+      if(rect.top <= (cont.top + threshold)){
+        console.log('stop moving top');
+        return false;
+      }
+      break;
+    case("left"):
+      if(rect.left <= (cont.left + threshold)){
+        console.log('stop moving left');
+        return false;
+      }
+      break;
+    case("bottom"):
+      if(rect.top >= (cont.bottom - (threshold*4))){
+        console.log('stop moving bottom');
+        return false;
+      }
+      break;
+    case("right"):
+      if(rect.right >= (cont.right - threshold)){
+        console.log('stop moving right');
+        return false;
+      }
+      break;
+  }
+  return true;
 }
 
 function setCookie(cname, cvalue, exdays) {
@@ -43,7 +62,8 @@ function getCookie(cname) {
 
 var $body = $('body'),
   $burger = $('button.burger-box'),
-  $player = $('#player');
+  $player = $('#player'),
+  $stage  = $('#stage');
 
 $(document).ready(function() {
   /*//////////////////////////////////////
@@ -68,10 +88,17 @@ $(document).ready(function() {
   //////////////////////////////////////*/
   var move = function(direction){
     var current = $player.offset(),
-        top = current.top,
-        left = current.left;
+        stage = $stage.offset(),
+        top = current.top - stage.top,
+        left = current.left - stage.left;
 
-    //console.log(direction);
+    $player.removeClass('looking-top looking-left looking-right looking-bottom');
+    $player.addClass('looking-'+direction);
+
+    console.log(isElementInContainer($player, $stage, ($player.height() / 2), direction));
+    if(! isElementInContainer($player, $stage, ($player.height() / 2), direction)){
+      return;
+    }
     
     switch(direction){
       case('top'):
@@ -84,7 +111,7 @@ $(document).ready(function() {
         $player.css('left',left + 60);
         break;
       case('bottom'):
-        $player.css('top',top+ 60);
+        $player.css('top',top + 80);
         break;
     }
   }
@@ -97,6 +124,8 @@ $(document).ready(function() {
         // Ignore it
         //return;
     }
+
+    $player.addClass('moving');
 
     // Remember it's down
     keysdown[e.keyCode] = true;
@@ -125,5 +154,8 @@ $(document).ready(function() {
   $(document).keyup(function(e){
     // Remove this key from the map
     delete keysdown[e.keyCode];
+    setTimeout(function(){
+      $player.removeClass('moving');
+    },100);
   });
 });

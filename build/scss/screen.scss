@@ -6,7 +6,7 @@
 @import "pages/**/*.scss";
 
 div#player{
-    display:block;
+    display:flex;
     position:absolute;
     top:50%;
     left:50%;
@@ -14,7 +14,60 @@ div#player{
     margin-top:-30px;
     width:40px;
     margin-left:-20px;
-    color:#fff;
     background-color:blue;
+    transition:all 0.2s linear;
+    span.player-name{
+        position:absolute;
+        top:-2em;
+        text-align:center;
+        color:#000;
+        white-space: nowrap;
+        &:before,
+        &:after{
+            display:inline;
+        }
+        &:before{
+            content:"< ";
+        }
+        &:after{
+            content:" >"
+        }
+    }
+    span.face{ // todo this is face
+        font-size:16px;
+        color:#fff;
+    }
+    &.looking-left{
+        justify-content:flex-start;
+        &.moving{
+            transform:rotate(-10deg);
+        }
+    }
+    &.looking-right{
+        justify-content:flex-end;
+        &.moving{
+            transform:rotate(10deg);
+        }
+    }
+    &.looking-bottom{
+        justify-content:center;
+    }
+    &.looking-top{
+        span.face{
+            display:none;
+        }
+    }
+}
 
+section#main-ui{
+    background-color:grey;
+    height:20vh;
+    width:100%;
+}
+
+section#stage{
+    position:relative;
+    height:80vh;
+    width:100%;
+    background-color:lightgrey;
 }

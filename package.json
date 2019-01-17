@@ -24,6 +24,7 @@
     "browser-sync": "^2.26.3",
     "browserify": "^16.1.1",
     "coffeelint": "^1.16.2",
+    "dotenv": "^6.2.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
     "gulp-babel": "^7.0.1",
